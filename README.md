@@ -1,6 +1,6 @@
 ## 🚀 Get Started
 
-Make sure you carry out the following steps in order - ensure that the installation and Quickstart guide were executed error free.
+Make sure you carry out the following steps in order - ensure that the installation and quickstart guide were executed error free.
 
 * **[Installation](installation.md)**: Set up your computer to work with the Reachy Mini
 * **[Quickstart Guide](quickstart.md)**: Run your first behavior on the bot.
