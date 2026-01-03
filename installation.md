@@ -205,11 +205,15 @@ Choose your installation method:
 
 ### 📦 PyPI Installation
 > We will be carrying out a PyPI Installation for the purpose of this class. Feel free to do a more elaborate source build in case you wish to contribute to the official reachy-mini documentation, however, that shall not be necessary for this class. 
-In your terminal, run:
-```bash
-uv pip install "reachy-mini"
-```
 
+- If you are on a **Windows** system, in your terminal/powershell run:
+  ```bash
+uv pip install reachy-mini==1.2.6rc2
+  ```
+- If you are on a **Linux** or **Mac** system, in your terminal run:
+  ```bash
+uv pip install "reachy-mini"
+  ```
 If you want to use the simulation mode, you need to add the `mujoco` extra:
 ```bash
 uv pip install "reachy-mini[mujoco]"
