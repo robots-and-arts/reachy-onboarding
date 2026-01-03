@@ -203,7 +203,7 @@ reachy_mini_env\Scripts\activate
 Choose your installation method:
 
 
-### 📦 PyPi Installation
+### 📦 PyPI Installation
 > We will be carrying out a PyPI Installation for the purpose of this class. Feel free to do a more elaborate source build in case you wish to contribute to the official reachy-mini documentation, however, that shall not be necessary for this class. 
 In your terminal, run:
 ```bash
