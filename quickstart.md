@@ -2,55 +2,48 @@
 
 Follow this guide to get your Reachy Mini up and running, either on real hardware or in simulation.
 
-## 1. Prerequisites
+## 1. Download Reachy Mini Control
 
-Make sure you have installed Reachy Mini on your computer following our [installation guide](installation.md). 
+**Reachy Mini Control** is the desktop app that acts as the command center for your robot. It includes visualization tools, an app launcher, and system settings, with no command line required.
 
-> **💡 Important:** Ensure you have created and activated your Python virtual environment. **Remember to activate it every time you open a new terminal!** In order to know if your virtual environment is active, you should see (<your_env_name>) at the start of a new line in your terminal.
+- 👉 [Download from the official website](https://hf.co/reachy-mini/#/download) (recommended for Windows, macOS, and Linux)
+- Alternative: [GitHub Releases](https://github.com/pollen-robotics/reachy-mini-desktop-app/releases) (for specific versions)
 
+**✨ Auto-update:** Once installed, open the app. It automatically checks for and installs updates for both the app and the robot's internal software.
 
-## 2. Ensure the Robot Server is running (Daemon)
+> **⚠️ Compatibility:** On ARM64 systems (DGX, Jetson, Surface, etc.) and unusual Linux distributions, the desktop app may not work. In that case, use the [Python SDK](https://huggingface.co/docs/reachy_mini/SDK/readme) directly (see [Alternative: Run the daemon from the command line](#alternative-run-the-daemon-from-the-command-line)). It is a fully supported way to control your robot.
 
-The **Daemon** is a background service that handles the low-level communication with motors and sensors. It must be running for your code to work.
+## 2. Connect your robot
 
-* **On Reachy Mini Lite (connected via USB to your computer)**:
-  - If you are using a **Windows** system, open a terminal/powershell and run :
-  ```bash
-  uv run --with "reachy-mini==1.2.6rc2" reachy-mini-daemon
-  ```
-  - If you are using a **Linux** or a **Mac** system, open a terminal and run :
-  ```bash
-  uv run reachy-mini-daemon
-  ```
-* **For Simulation (No robot needed)**:
-  - On a **Windows** system, open a terminal/powershell and run:
-  ```bash
-  uv run --with "reachy-mini==1.2.6rc2" reachy-mini-daemon --sim
-  ```
-  - On a **Linux** or **Mac** system, open a terminal and run:
-  ```bash
-  uv run reachy-mini-daemon --sim
-  ```
+1. Connect your **Reachy Mini Lite** to your computer via USB.
+2. Open **Reachy Mini Control** and allow any permissions your operating system requests.
+3. Select **Reachy Mini Lite** in the app.
 
-✅ **Verification:** Open [http://localhost:8000](http://localhost:8000) in your browser. If you see the Reachy Dashboard, you are ready!
+✅ **Verification:** The app shows real-time information about your robot. If you see it, you are ready.
 
-## 3. Your First Script
+## 3. Explore apps
 
-> **⚠️ Important:** Keep the daemon terminal open and running! The daemon must stay active for your robot to work.
+1. Log in with your Hugging Face account.
+2. Go to the **Applications** tab and click **Discover Apps** to browse compatible apps from Hugging Face Spaces.
+3. Click **Install** on an app, then click **Start ▶️** to run it.
 
-### Create your Python script
+For more, see the [Usage Guide](https://huggingface.co/docs/reachy_mini/platforms/reachy_mini_lite/usage).
 
-**Step 1:** Open a new terminal window
+## 4. Your first script
 
-**Step 2:** Create a new file called `hello.py` and copy-paste the following code into it:
+> **⚠️ Important:** Keep Reachy Mini Control open and connected while running scripts. The app runs the background service that your code connects to.
+
+Make sure the Reachy Mini SDK is installed and your Python virtual environment is activated (see the [installation guide](installation.md)). Remember to activate it every time you open a new terminal.
+
+Create a file called `hello.py`:
 
 ```python
 from reachy_mini import ReachyMini
 
 # Connect to the running daemon
 with ReachyMini() as mini:
-    print("Connected to Reachy Mini! ")
-    
+    print("Connected to Reachy Mini!")
+
     # Wiggle antennas
     print("Wiggling antennas...")
     mini.goto_target(antennas=[0.5, -0.5], duration=0.5)
@@ -60,12 +53,38 @@ with ReachyMini() as mini:
     print("Done!")
 ```
 
-**Step 3:** Save the file and run your script:
+Run it in a new terminal:
 
-In your new terminal, run:
 ```bash
 python hello.py
 ```
-⚠️ Ensure that you are running the script while your virtual environment is running.
 
 🎉 If everything went well, your robot should now wiggle its antennas!
+
+## Alternative: Run the daemon from the command line
+
+If you can't use the desktop app, or you want a headless setup, start the daemon manually and keep that terminal open.
+
+**Reachy Mini Lite (USB)**
+
+- Windows (PowerShell):
+```bash
+  uv run --with "reachy-mini==1.2.6rc2" reachy-mini-daemon
+```
+- Linux / macOS:
+```bash
+  uv run reachy-mini-daemon
+```
+
+**Simulation (no robot needed)**
+
+- Windows (PowerShell):
+```bash
+  uv run --with "reachy-mini==1.2.6rc2" reachy-mini-daemon --sim
+```
+- Linux / macOS:
+```bash
+  uv run reachy-mini-daemon --sim
+```
+
+✅ **Verification:** Open [http://localhost:8000](http://localhost:8000). If you see the Reachy Dashboard, you are ready. Then continue with [Your first script](#4-your-first-script).
